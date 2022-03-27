@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: python
+    build: ./app
+    volumes:
+      - ./app/:/usr/src/app/
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - dbase   
+    network_mode: host  
+  dbase:
+    container_name: postgres
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=chibi
+      - POSTGRES_PASSWORD=chibi_rules!
+      - POSTGRES_DB=hero_database_dev
+
+volumes:
+  postgres_data:
