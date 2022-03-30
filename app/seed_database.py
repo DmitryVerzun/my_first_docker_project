@@ -43,26 +43,17 @@ def main():
     add_slogan("Do you know the way? I'm weary and lost.", "Ulfric Stormcloak")
 
     add_slogan("I want every arrow in the sky!", "General Thulius")
-    add_slogan("Ulfric is a fool and a coward who naïvely believes \
-        he can bring about peace through warfare. It's rather sad, really.", "Elisif")
+    add_slogan("Ulfric is a fool and a coward", "Elisif")
     add_slogan("Dragonborn huh? Was it your ma or your pa that was the dragon?", "Hadvar")
     add_slogan("The sooner we end this rebellion, the sooner I'll be able to sleep at night.", "Rikke")
 
     #note to self: remove ugly tabulations
-    add_slogan("Oh, it took years, but I earned my way to the top. \
-        I own Chillfurrow Farm, you see. Very successful business. Obviously.", "Nazeem")
-    add_slogan("I actually advise the Jarl on political matters. My input is invaluable, \
-        of course. But this is all probably a bit over your head.", "Nazeem")
-    add_slogan("I had hoped your scholars would be on a level comparable with my own colleagues. \
-    They are not.", "Ancano")
-    add_slogan("Another new Apprentice, I see. \
-     Are you here because you believe you can change the world? Or are you only in it for yourself? \
-     I assure you I will be watching you - all of you - very closely.", "Ancano")
-    add_slogan("You've come for me, have you? You think I don't know what you're up to? \
-    You think I can't destroy you? The power to unmake the world at my fingertips, \
-    and you think you can do anything about it?", "Ancano")
-    add_slogan("Talos was a heroic man, but not a god. \
-    It pains the Altmer that we must remind our younger cousins of the difference.", "Elenwen")
+    add_slogan("Oh, it took years, but I earned my way to the top.", "Nazeem")
+    add_slogan("I actually advise the Jarl on political matters.", "Nazeem")
+    add_slogan("I had hoped your scholars would be on a level comparable with my own colleagues.", "Ancano")
+    add_slogan("Are you here because you believe you can change the world?", "Ancano")
+    add_slogan("You've come for me, have you? You think I don't know what you're up to?", "Ancano")
+    add_slogan("Talos was a heroic man, but not a god.", "Elenwen")
 
 
 if __name__ == "__main__":

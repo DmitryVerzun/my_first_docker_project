@@ -17,6 +17,7 @@ COPY ./requirements.txt /usr/src/app/
 #StackOverflow-inspired fixes for pg_config and greenlet problems :)
 RUN  python3 -m pip install -r requirements.txt
 
+COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 #copy project
 COPY . /usr/src/app/
 #RUN ls
@@ -24,4 +25,4 @@ COPY . /usr/src/app/
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 #ENTRYPOINT ["bash"]
-#ENTRYPOINT ["usr/src/app/entrypoint.sh"]
+#ENTRYPOINT ["./entrypoint.sh"]

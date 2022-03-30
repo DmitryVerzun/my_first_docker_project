@@ -1,6 +1,6 @@
 import argparse
 
-from app.data_interaction import add_backstory
+from data_interaction import add_backstory
 
 
 def main():

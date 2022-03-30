@@ -1,7 +1,7 @@
 import argparse
 import datetime
 
-from app.data_interaction import add_hero
+from data_interaction import add_hero
 
 
 def main():

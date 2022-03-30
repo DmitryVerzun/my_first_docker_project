@@ -1,6 +1,6 @@
 import argparse
 
-from app.data_interaction import delete_hero
+from data_interaction import delete_hero
 
 
 def main():
