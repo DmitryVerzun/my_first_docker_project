@@ -14,11 +14,17 @@ The SQLAlchemy part is fully functional but only if you run it with a jupyter no
 5. Ending the war by app/interact/end_war.py This is achieved by running the add_random_confrontation() function in an infinite loop until only one side is left. WARNING: running this WILL wipe out most of the database.
 
 ## Usage
-Build the image:
+Build the image, start a container and launch it in background:
 ```
-docker-compose build
+docker-compose up --build -d
 ```
-Running the image with docker-compose up will leave the postgres container in a hanging state (LOG:  database system is ready to accept connections). 
-
+Then python commands can be executed with the following command (path should be specified relative to app/ directory):
+```
+docker exec python_cont python script_location
+```
+## Bugs
 The python container will exit with code 0 if all entrypoint.sh execution is commented. If it is not, the execution will fail with the following message:
 >ERROR: for python  Cannot start service app: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "usr/src/app/entrypoint.sh": stat usr/src/app/entrypoint.sh: no such file or directory: unknown
+
+Interacting with database will cause OperationalError
+> sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "dbase" to address: Name or service not known
