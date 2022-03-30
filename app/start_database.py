@@ -1,11 +1,14 @@
 from sqlalchemy import create_engine, Integer, Column, DateTime, String, ForeignKey, Table, update, delete
 from sqlalchemy.orm import declarative_base, relationship, backref, sessionmaker
 
-db_string = DATABASE_URL
-engine = create_engine(db_string)
-Base = declarative_base()
+#not seen for some reason
+#db_string = DATABASE_URL
+dbase = declarative_base()
 
-confrontation = Table("confrontation", Base.metadata,
+db_string = "postgresql://chibi:chibi_rules!@dbase:5432/hero_database_dev"
+engine = create_engine(db_string)
+
+confrontation = Table("confrontation", dbase.metadata,
     Column("hero_1_id", Integer, ForeignKey("hero.id"), primary_key=True),
     Column("hero_2_id", Integer, ForeignKey("hero.id"), primary_key=True),
     Column("hero_1_moto_id", Integer, ForeignKey("slogan.id")),
@@ -14,7 +17,7 @@ confrontation = Table("confrontation", Base.metadata,
 )
 
 
-class Hero(Base):
+class Hero(dbase):
     __tablename__ = "hero"
     __table_args__ = {"extend_existing": True}
 
@@ -29,7 +32,7 @@ class Hero(Base):
     #backstory = relationship("BackStory", cascade="all, delete")
 
 #many-to-one with hero
-class Slogan(Base):
+class Slogan(dbase):
     __tablename__ = "slogan"
     __table_args__ = {"extend_existing": True}
 
@@ -43,7 +46,7 @@ class Slogan(Base):
     hero = relationship("Hero", foreign_keys=[hero_id])
 
 #one-to-one with hero
-class BackStory(Base):
+class BackStory(dbase):
     __tablename__ = "backstory"
     __table_args__ = {"extend_existing": True}
 
@@ -53,7 +56,7 @@ class BackStory(Base):
     hero_id = Column(Integer, ForeignKey("hero.id"))
     hero = relationship("Hero", backref=backref("hero", uselist=False))
 
-Base.metadata.create_all(engine)
+dbase.metadata.create_all(engine)
 session_maker = sessionmaker(bind=engine)
 session = session_maker()
 

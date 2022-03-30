@@ -4,8 +4,8 @@ FROM python:3.10.2-slim-bullseye
 
 #setting work directory
 WORKDIR /usr/src/app
-RUN pwd
-RUN ls
+#RUN pwd
+#RUN ls
 
 #environmental variables
 ENV PYTHONWRITEBYTECODE 1
@@ -19,8 +19,9 @@ RUN  python3 -m pip install -r requirements.txt
 
 #copy project
 COPY . /usr/src/app/
-RUN ls
-RUN pwd
+#RUN ls
+#RUN pwd
 
-#ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+#ENTRYPOINT ["bash"]
 #ENTRYPOINT ["usr/src/app/entrypoint.sh"]
