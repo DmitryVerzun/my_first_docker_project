@@ -205,8 +205,8 @@ def pick_random_moto_id(hero_id):
     all_moto_ids = []
     for slogan in session.query(Slogan).filter(Slogan.hero_id==hero_id):
          all_moto_ids.append(slogan.moto_id)
-
-    return random.choice(all_moto_ids)
+    if len(all_moto_ids) > 0:
+        return random.choice(all_moto_ids)
 
 
 def add_random_confrontation():

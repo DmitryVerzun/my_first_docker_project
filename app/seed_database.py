@@ -47,7 +47,6 @@ def main():
     add_slogan("Dragonborn huh? Was it your ma or your pa that was the dragon?", "Hadvar")
     add_slogan("The sooner we end this rebellion, the sooner I'll be able to sleep at night.", "Rikke")
 
-    #note to self: remove ugly tabulations
     add_slogan("Oh, it took years, but I earned my way to the top.", "Nazeem")
     add_slogan("I actually advise the Jarl on political matters.", "Nazeem")
     add_slogan("I had hoped your scholars would be on a level comparable with my own colleagues.", "Ancano")
