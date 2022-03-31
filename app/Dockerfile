@@ -20,9 +20,9 @@ RUN  python3 -m pip install -r requirements.txt
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 #copy project
 COPY . /usr/src/app/
-#RUN ls
-#RUN pwd
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
-#ENTRYPOINT ["bash"]
-#ENTRYPOINT ["./entrypoint.sh"]
+#CMD ["which", "bash"]
+#CMD ["/usr/src/app/entrypoint.sh"]
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+#ENTRYPOINT ["entrypoint]

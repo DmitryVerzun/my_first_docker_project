@@ -5,7 +5,7 @@ This project attempts to implement a PostgreSQL database and interaction with it
 
 Fails at the stage of building a container (entrypoint.sh and other scripts not recognized).
 
-The SQLAlchemy part is fully functional but only if you run it with a jupyter notebook. It currently supports the following functions (use --help for details on each one):
+Currently supports the following functions (use --help for details on each one):
 
 1. Adding / deleting heroes from the database. Script name - add_hero.py
 2. Adding slogan to a  hero. Script name - add_slogan.py
@@ -17,7 +17,7 @@ Build the image, start a container and launch it in background (and ready for co
 ```
 docker-compose up --build -d
 ```
-Scrripts for initializing and seeding database (will automate later, see Bugs section)
+Scrripts that automatically run when container is started (in entrypoint.sh)
 ```
 docker-compose exec app python start_logging.py
 docker-compose exec app python start_database.py
