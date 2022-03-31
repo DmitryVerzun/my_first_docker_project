@@ -126,8 +126,11 @@ def delete_hero(hero_name):
 
     if hero_name not in (hero[0] for hero in session.query(Hero.name)):
         logging.error("No hero with name %s in database" % hero_name)
+        return
         
-    session.execute(delete(Hero).where(Hero.name == hero_name))
+ #   session.execute(delete(Hero).where(Hero.name == hero_name))
+    hero_to_delete = session.query(Hero).filter(Hero.name==hero_name).first()
+    session.delete(hero_to_delete)
     session.commit()
     
     logging.info("Hero %s deleted from database" % hero_name)

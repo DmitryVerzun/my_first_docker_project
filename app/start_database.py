@@ -33,8 +33,7 @@ class Hero(Base):
     race = Column(String(30))
     power = Column(Integer)
 
-    slogans = relationship("Slogan", back_populates="hero", \
-        cascade="all, delete-orphan", passive_deletes=True)
+    slogans = relationship("Slogan", back_populates="hero_slog", passive_deletes=True)
     #backstory = relationship("BackStory", cascade="all, delete")
 
 #many-to-one with hero
@@ -49,7 +48,9 @@ class Slogan(Base):
     moto_id = Column(Integer)
 
     hero_id = Column(Integer, ForeignKey("hero.id", ondelete="CASCADE"))
-    hero = relationship("Hero", back_populates="slogans")
+    hero_slog = relationship("Hero", backref=backref("hero_slog"), cascade="all, delete")
+ #   hero_slog=relationship ("Hero", back_populates="slogans", cascade="all, delete")
+ #   hero = relationship("Hero", back_populates="slogans")
 
 #one-to-one with hero
 class BackStory(Base):
@@ -59,8 +60,8 @@ class BackStory(Base):
     id = Column(Integer, primary_key=True)
     story = Column(String(200))
 
-    hero_id = Column(Integer, ForeignKey("hero.id"))
-    hero = relationship("Hero", backref=backref("hero", uselist=False))
+    hero_id = Column(Integer, ForeignKey("hero.id", ondelete="CASCADE"))
+    hero = relationship("Hero", backref=backref("hero", uselist=False), cascade="all, delete")
 
 Base.metadata.create_all(engine)
 session_maker = sessionmaker(bind=engine)
