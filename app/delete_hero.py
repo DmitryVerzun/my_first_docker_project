@@ -1,11 +1,11 @@
 import argparse
 
-from app.data_interaction import delete_hero
+from data_interaction import delete_hero
 
 
 def main():
     parser = argparse.ArgumentParser(description="Command line argument parser for delete_hero()")
-    parser.add_argument("hero_id", help="Name of the hero you want deleted",
+    parser.add_argument("hero_name", help="Name of the hero you want deleted",
                         type=str)
     args = parser.parse_args()
 

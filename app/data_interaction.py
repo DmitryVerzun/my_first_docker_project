@@ -126,8 +126,11 @@ def delete_hero(hero_name):
 
     if hero_name not in (hero[0] for hero in session.query(Hero.name)):
         logging.error("No hero with name %s in database" % hero_name)
+        return
         
-    session.execute(delete(Hero).where(Hero.name == hero_name))
+ #   session.execute(delete(Hero).where(Hero.name == hero_name))
+    hero_to_delete = session.query(Hero).filter(Hero.name==hero_name).first()
+    session.delete(hero_to_delete)
     session.commit()
     
     logging.info("Hero %s deleted from database" % hero_name)
@@ -205,8 +208,8 @@ def pick_random_moto_id(hero_id):
     all_moto_ids = []
     for slogan in session.query(Slogan).filter(Slogan.hero_id==hero_id):
          all_moto_ids.append(slogan.moto_id)
-
-    return random.choice(all_moto_ids)
+    if len(all_moto_ids) > 0:
+        return random.choice(all_moto_ids)
 
 
 def add_random_confrontation():
