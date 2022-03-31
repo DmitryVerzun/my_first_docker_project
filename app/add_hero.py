@@ -12,7 +12,7 @@ def main():
     parser.add_argument("name", help="Your hero's name",
                         type=str)
     parser.add_argument("birthday", help="Your hero's birthday (must be in yyyy-mm-dd format)",
-                        type=datetime.date.fromisoformat)
+                        type=str)
     parser.add_argument("race", help="Your hero's race",
                         type=str)
     parser.add_argument("power", help="Your hero's power level (look into Readme for details)",

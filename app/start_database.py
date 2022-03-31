@@ -18,7 +18,7 @@ confrontation = Table("confrontation", Base.metadata,
     Column("hero_2_id", Integer, ForeignKey("hero.id"), primary_key=True),
     Column("hero_1_moto_id", Integer, ForeignKey("slogan.id")),
     Column("hero_2_moto_id", Integer, ForeignKey("slogan.id")),
-    Column("winner", Integer)
+    Column("winner", Integer), extend_existing=True
 )
 
 
@@ -33,7 +33,8 @@ class Hero(Base):
     race = Column(String(30))
     power = Column(Integer)
 
-    slogans = relationship("Slogan", back_populates="slogan", cascade="all, delete-orphan")
+    slogans = relationship("Slogan", back_populates="hero", \
+        cascade="all, delete-orphan", passive_deletes=True)
     #backstory = relationship("BackStory", cascade="all, delete")
 
 #many-to-one with hero
@@ -47,8 +48,8 @@ class Slogan(Base):
     #this is probably not very good
     moto_id = Column(Integer)
 
-    hero_id = Column(Integer, ForeignKey("hero.id"))
-    hero = relationship("Hero", foreign_keys=[hero_id], back_populates="hero")
+    hero_id = Column(Integer, ForeignKey("hero.id", ondelete="CASCADE"))
+    hero = relationship("Hero", back_populates="slogans")
 
 #one-to-one with hero
 class BackStory(Base):
