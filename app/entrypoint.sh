@@ -12,6 +12,7 @@ if [ "$ENVIRONMENT" = "development" ]
 then
     echo "Removing development database and creating a brand new one..."
     python start_database.py
+    python create_tables.py
     echo "Database created"
     echo "Seeding database"
     python seed_database.py

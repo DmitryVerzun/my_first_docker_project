@@ -1,8 +1,10 @@
 import datetime
-
-from start_database import *
-from start_logging import logging
 import random
+
+from start_database import session_maker
+from create_tables import *
+from start_logging import logging
+
 
 
 def randomize_attack_success(power_attacker, power_defender, stealth_factor=2):
@@ -35,7 +37,7 @@ def get_hero_id_from_name(hero_name):
     Gets hero id given hero's name.
     Intended mainly for use inside other functions.
     """
-
+    session = session_maker()
     # using first here bothers me
     hero = session.query(Hero).filter(Hero.name==hero_name).first()
     return hero.id
@@ -46,7 +48,7 @@ def hero_exists(id):
     Checks if hero exists given hero id.
     Intended mainly for use inside other functions.
     """
-
+    session = session_maker()
     if session.query(Hero).get(id):
         return True
     return False
@@ -56,7 +58,7 @@ def add_hero(side, name, birthday, race, power):
     """
     Adds hero to database (table Hero)
     """
-
+    session = session_maker()
     birthday = datetime.date.fromisoformat(birthday)
 
     hero_to_add = Hero(side=side, name=name, 
@@ -73,7 +75,7 @@ def add_slogan(moto, hero_name):
     Indexing is independent for each hero and is done authomatically
     Each hero must have at least one slogan (not implemented yet).
     """
-
+    session = session_maker()
     hero_id = get_hero_id_from_name(hero_name)
 
     if not hero_exists(hero_id):
@@ -94,7 +96,7 @@ def add_backstory(story, hero_name):
     If a backstory already exists for this hero, a warning will appear in stdout and log file.
     Backstory will be replaced but former backstory can be retrieved from log.txt
     """
-
+    session = session_maker()
     hero_id = get_hero_id_from_name(hero_name)
         
     if not hero_exists(hero_id):
@@ -123,7 +125,7 @@ def delete_hero(hero_name):
     Deletes a hero given hero's name.
     Hero's slogans and backstory are also deleted.
     """
-
+    session = session_maker()
     if hero_name not in (hero[0] for hero in session.query(Hero.name)):
         logging.error("No hero with name %s in database" % hero_name)
         return
@@ -146,7 +148,7 @@ def add_confrontation(hero_1_id, hero_2_id, moto1, moto2, \
 
     Fighting mechanics are implemented in the randomize_draw() and randomize_attack_success() functions.
     """
-    
+    session = session_maker()   
     hero1 = session.query(Hero).get(hero_1_id)
     hero2 = session.query(Hero).get(hero_2_id)
 
@@ -193,6 +195,7 @@ def pick_random_hero_id(side):
     Pick random hero id.
     Used when creating a random confrontation.
     """
+    session = session_maker()
     all_hero_ids = []
     for hero in session.query(Hero).filter(Hero.side==side):
          all_hero_ids.append(hero.id)
@@ -205,6 +208,7 @@ def pick_random_moto_id(hero_id):
     Pick random slogan id.
     Used when creating a random confrontation.
     """
+    session = session_maker()
     all_moto_ids = []
     for slogan in session.query(Slogan).filter(Slogan.hero_id==hero_id):
          all_moto_ids.append(slogan.moto_id)
@@ -217,7 +221,7 @@ def add_random_confrontation():
     A wrapper for the add_confrontation function.
     Randomizes everything and then calls add_confrontation()
     """
-    
+    session = session_maker()
     #get distinct sides and pick two at random
     all_sides = []
     for side in session.query(Hero.side).distinct():

@@ -1,8 +1,9 @@
 #script for filling daatbase with sample data
 #DON'T call at production stage
 
-from start_database import *
+from create_tables import *
 from data_interaction import *
+from start_database import *
 
 
 def main():

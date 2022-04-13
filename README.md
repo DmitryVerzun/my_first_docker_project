@@ -40,3 +40,4 @@ Something wrong with the slogan-hero relationship. Will fix later
 * Add volumes for production
 * Refactor app structure (had a problem with imports)
 * Configure environments properly
+* Maybe make scripts executable (python location - /usr/local/bin/python)
