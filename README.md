@@ -32,10 +32,9 @@ Most things are logged, use this command to acess:
 docker-compose exec app cat log.txt
 ```
 ## Bugs
-The python container will exit with code 0 if all entrypoint.sh execution is commented. If it is not, the execution will fail with the following message:
->ERROR: for python  Cannot start service app: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "usr/src/app/entrypoint.sh": stat usr/src/app/entrypoint.sh: no such file or directory: unknown
-
 Something wrong with the slogan-hero relationship. Will fix later
+
+Delete statements are not actually executed
 ## To do
 * Add volumes for production
 * Refactor app structure (had a problem with imports)
